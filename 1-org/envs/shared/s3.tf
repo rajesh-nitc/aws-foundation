@@ -42,6 +42,29 @@ module "audit_logs_bucket" {
 
   attach_deny_insecure_transport_policy = true
 
+  lifecycle_rule = [
+    {
+      id      = "auto-archive"
+      enabled = true
+      prefix  = "/"
+
+      transition = [
+        {
+          days          = 30
+          storage_class = "ONEZONE_IA"
+        },
+        {
+          days          = 60
+          storage_class = "GLACIER"
+        }
+      ]
+
+      expiration = {
+        days = 90
+      }
+    }
+  ]
+
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true
