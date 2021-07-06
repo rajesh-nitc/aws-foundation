@@ -58,10 +58,6 @@ module "audit_logs_bucket" {
           storage_class = "GLACIER"
         }
       ]
-
-      expiration = {
-        days = 90
-      }
     }
   ]
 
