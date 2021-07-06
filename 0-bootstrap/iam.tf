@@ -12,7 +12,7 @@ module "terraform_role" {
   admin_role_requires_mfa = false
 }
 
-# org-admin user to assume Terraform role in management and default role in seed
+# org-admin group to assume Terraform role in management and default role in seed
 module "org_admins_group_assume_terraform_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
   version = "4.2.0"
@@ -22,6 +22,7 @@ module "org_admins_group_assume_terraform_role" {
   assumable_roles = [
     module.terraform_role.admin_iam_role_arn,
     "arn:aws:iam::${aws_organizations_account.seed_account.id}:role/OrganizationAccountAccessRole",
+    "arn:aws:iam::${aws_organizations_account.audit_logs_account.id}:role/OrganizationAccountAccessRole",
 
   ]
 
