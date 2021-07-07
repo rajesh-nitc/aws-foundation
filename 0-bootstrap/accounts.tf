@@ -5,7 +5,7 @@ resource "aws_organizations_account" "seed_account" {
   parent_id = aws_organizations_organizational_unit.common_ou.id
 }
 
-# Audit logs account
+# Logging account: for audit logs and config snapshots
 resource "aws_organizations_account" "audit_logs_account" {
   name      = "acc-logging"
   email     = "budita.org.logging@gmail.com"

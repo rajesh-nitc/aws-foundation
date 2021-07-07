@@ -1,13 +1,13 @@
-resource "random_pet" "this" {
+resource "random_pet" "config" {
   length = 2
 }
 
-data "aws_iam_policy_document" "bucket_policy" {
+data "aws_iam_policy_document" "config_bucket_policy" {
   statement {
     principals {
       type = "Service"
       identifiers = [
-        "cloudtrail.amazonaws.com",
+        "config.amazonaws.com",
       ]
     }
 
@@ -16,13 +16,13 @@ data "aws_iam_policy_document" "bucket_policy" {
     ]
 
     resources = [
-      "arn:aws:s3:::${local.bucket_name}",
-      "arn:aws:s3:::${local.bucket_name}/*"
+      "arn:aws:s3:::${local.config_bucket}",
+      "arn:aws:s3:::${local.config_bucket}/*"
     ]
   }
 }
 
-module "audit_logs_bucket" {
+module "config_bucket" {
   providers = {
     aws = aws.audit_logs_account
   }
@@ -30,11 +30,11 @@ module "audit_logs_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "2.6.0"
 
-  bucket = local.bucket_name
+  bucket = local.config_bucket
   acl    = "private"
 
   attach_policy = true
-  policy        = data.aws_iam_policy_document.bucket_policy.json
+  policy        = data.aws_iam_policy_document.config_bucket_policy.json
 
   attach_deny_insecure_transport_policy = true
 
@@ -62,4 +62,3 @@ module "audit_logs_bucket" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
-

@@ -1,15 +1,5 @@
 data "aws_iam_policy_document" "sample_policy_doc" {
   statement {
-    sid    = "DenyS3BucketsPublicAccess"
-    effect = "Deny"
-    actions = [
-      "s3:PutBucketPublicAccessBlock",
-      "s3:DeletePublicAccessBlock"
-    ]
-    resources = ["*"]
-  }
-
-  statement {
     sid       = "DenyLeavingOrgs"
     effect    = "Deny"
     actions   = ["organizations:LeaveOrganization"]
