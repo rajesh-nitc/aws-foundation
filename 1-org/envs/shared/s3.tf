@@ -1,7 +1,3 @@
-locals {
-  bucket_name = "bkt-logs-${random_pet.this.id}"
-}
-
 resource "random_pet" "this" {
   length = 2
 }

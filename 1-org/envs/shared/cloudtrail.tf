@@ -1,5 +1,4 @@
-# For an organization trail, this resource must be in the master account of the organization
-# Send audit logs to cloudwatch and s3 in audit logs account
+# Must be in management account
 resource "aws_cloudtrail" "org" {
   name                       = "org-cloudtrail"
   cloud_watch_logs_group_arn = "${aws_cloudwatch_log_group.cloudtrail_events.arn}:*"
