@@ -8,6 +8,11 @@ resource "aws_config_delivery_channel" "this" {
 resource "aws_config_configuration_recorder" "this" {
   name     = "org-config-recorder"
   role_arn = aws_iam_role.config_assumable_role.arn
+
+  recording_group {
+    all_supported                 = true
+    include_global_resource_types = true
+  }
 }
 
 resource "aws_config_configuration_recorder_status" "this" {
@@ -22,11 +27,11 @@ resource "aws_config_configuration_aggregator" "org" {
     aws_iam_role_policy_attachment.aggregator_managed_attach,
   ]
 
-  name = "aggregator-${var.region}"
+  name = "aggregator-all-regions"
 
   organization_aggregation_source {
-    regions  = [var.region]
-    role_arn = aws_iam_role.aggregator_can_assume_role.arn
+    all_regions = true
+    role_arn    = aws_iam_role.aggregator_can_assume_role.arn
   }
 }
 
