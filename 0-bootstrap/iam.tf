@@ -13,7 +13,7 @@ module "terraform_role" {
 }
 
 # org-admin group to assume Terraform role in management and
-# default role in seed and logging - so that i can browse through accounts with one user
+# default role in seed and logging - so that we can browse through accounts with one user
 module "org_admins_group_assume_terraform_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
   version = "4.2.0"
