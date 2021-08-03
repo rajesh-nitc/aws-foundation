@@ -1,5 +1,5 @@
 # TODO
 
-# Network Hub Account in common ou
+# Hub Network Account in common ou
 
-# Dns Hub in common ou
+# Hub DNS in common ou

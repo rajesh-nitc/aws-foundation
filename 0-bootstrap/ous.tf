@@ -1,5 +1,5 @@
 # Bootstrap ou
-resource "aws_organizations_organizational_unit" "common_ou" {
+resource "aws_organizations_organizational_unit" "bootstrap" {
   name      = "ou-bootstrap"
   parent_id = aws_organizations_organization.org.roots[0].id
 }
